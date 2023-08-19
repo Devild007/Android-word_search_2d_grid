@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/dark_background"
+    android:orientation="vertical"
+    tools:context=".ui.view.activity.MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:text="@string/enter_rows_and_columns_count"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_size_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_row"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/default_fifteen"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:hint="@string/enter_row_count"
+        app:hintTextColor="@color/text_color_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_row"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_height"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_12">
+
+            <requestFocus />
+        </androidx.appcompat.widget.AppCompatEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_column"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/default_fifteen"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:hint="@string/enter_column_count"
+        app:boxStrokeColor="@color/gold"
+        app:hintTextColor="@color/text_color_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_row">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_column"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_height"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_12" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_alphabet"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/default_fifteen"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:hint="@string/enter_alphabet"
+        app:boxStrokeColor="@color/gold"
+        app:hintTextColor="@color/text_color_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_column">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_alphabet"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_height"
+            android:digits="qwertyuiopasdfghjklzxcvbnm"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:inputType="text"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_12" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_create_grid"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/field_height"
+        android:layout_marginHorizontal="@dimen/default_fifteen"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:backgroundTint="@color/gold_dark"
+        android:foreground="?selectableItemBackground"
+        android:text="Create grid"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:cornerRadius="@dimen/padding_five"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_alphabet" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

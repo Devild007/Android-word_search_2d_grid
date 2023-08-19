@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.activity.GridWordActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/fl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/default_fifteen">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/margin_twenty"
+                android:layout_height="@dimen/margin_twenty"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_back"/>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/default_fifteen"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:hint="Enter word"
+        app:boxStrokeColor="@color/gold"
+        app:hintTextColor="@color/text_color_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_word"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_height"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_12" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/field_height"
+        android:layout_marginHorizontal="@dimen/default_fifteen"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:backgroundTint="@color/gold_dark"
+        android:foreground="?selectableItemBackground"
+        android:text="@string/search"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:cornerRadius="@dimen/padding_five"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_input" />
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_fifteen"
+        android:gravity="center"
+        android:nestedScrollingEnabled="true"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
