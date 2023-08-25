@@ -31,20 +31,20 @@ class MainActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
     private fun init() = binding?.apply {
         if (session.keyRow?.isNotEmpty() == true) {
             etRow.setText(session.keyRow)
-            setAlphabetEditTextLenght()
+            setAlphabetEditTextLength()
         }
         if (session.keyColumn?.isNotEmpty() == true) {
             etColumn.setText(session.keyColumn)
-            setAlphabetEditTextLenght()
+            setAlphabetEditTextLength()
         }
         if (session.keyAlphabets?.isNotEmpty() == true) {
-            setAlphabetEditTextLenght()
+            setAlphabetEditTextLength()
             etAlphabet.setText(session.keyAlphabets)
         }
 
-        etRow.onTextChange { setAlphabetEditTextLenght() }
+        etRow.onTextChange { setAlphabetEditTextLength() }
 
-        etColumn.onTextChange { setAlphabetEditTextLenght() }
+        etColumn.onTextChange { setAlphabetEditTextLength() }
 
         btnCreateGrid.setOnClickListener { onBtnClicked() }
 
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
         }
     }
 
-    private fun setAlphabetEditTextLenght() = binding?.apply {
+    private fun setAlphabetEditTextLength() = binding?.apply {
         val row = if (etRow.getString().isNotEmpty()) etRow.getInt() else 0
         val column = if (etColumn.getString().isNotEmpty()) etColumn.getInt() else 0
         val length = row * column
