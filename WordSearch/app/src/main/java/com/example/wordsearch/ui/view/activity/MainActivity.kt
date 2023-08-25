@@ -57,22 +57,36 @@ class MainActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
 
     private fun onBtnClicked() = binding?.apply {
         when {
-            etRow.getString().isEmpty() -> dialogOk(
-                getString(R.string.attention), getString(R.string.enter_no_row_count), this@MainActivity
-            )
+            etRow.getString().isEmpty() -> {
+                dialogOk(getString(R.string.attention), getString(R.string.enter_no_row_count), this@MainActivity)
+                tiRow.error = getString(R.string.enter_no_row_count)
+            }
 
-            etColumn.getString().isEmpty() -> dialogOk(
-                getString(R.string.attention), getString(R.string.enter_no_column_count), this@MainActivity
-            )
+            etColumn.getString().isEmpty() -> {
+                dialogOk(getString(R.string.attention), getString(R.string.enter_no_column_count), this@MainActivity)
+                tiColumn.error = getString(R.string.enter_no_column_count)
+            }
 
-            etAlphabet.getString().isEmpty() -> dialogOk(
-                getString(R.string.attention), getString(R.string.enter_alphabet_in_one_go), this@MainActivity
-            )
+            etRow.getString() == "0" -> {
+                dialogOk(getString(R.string.attention), getString(R.string.entered_row_cannot_zero), this@MainActivity)
+                tiRow.error = getString(R.string.entered_row_cannot_zero)
+            }
 
-            (etRow.getInt() * etColumn.getInt()) != etAlphabet.getString().length -> dialogOk(
-                getString(R.string.attention), "Alphabet's length should be ${etRow.getInt() * etColumn.getInt()} character's.",
-                this@MainActivity
-            )
+            etColumn.getString() == "0" -> {
+                dialogOk(getString(R.string.attention), getString(R.string.entered_column_cannot_zero), this@MainActivity)
+                tiColumn.error = getString(R.string.entered_column_cannot_zero)
+            }
+
+            etAlphabet.getString().isEmpty() -> {
+                dialogOk(getString(R.string.attention), getString(R.string.enter_alphabet_in_one_go), this@MainActivity)
+                tiAlphabet.error = getString(R.string.enter_alphabet_in_one_go)
+            }
+
+            (etRow.getInt() * etColumn.getInt()) != etAlphabet.getString().length ->
+                dialogOk(
+                    getString(R.string.attention), "Alphabet's length should be ${etRow.getInt() * etColumn.getInt()} character's.",
+                    this@MainActivity
+                )
 
             else -> {
                 session.keyAlphabets = etAlphabet.getString()
@@ -99,4 +113,5 @@ class MainActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
         _binding = null
         super.onDestroy()
     }
+
 }

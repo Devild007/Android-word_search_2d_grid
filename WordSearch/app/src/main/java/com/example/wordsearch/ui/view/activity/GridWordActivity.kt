@@ -26,14 +26,14 @@ class GridWordActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
     private var _binding: ActivityGridWordBinding? = null
     private val binding get() = _binding
 
-    private lateinit var gridAdapter: GridAdapter
+    private var gridAdapter: GridAdapter? = null
 
     private lateinit var gridData: ArrayList<Char>
 
     private val session = SessionManager()
 
-    val rows = if (session.keyRow?.isNotEmpty() == true) session.keyRow.toString().toInt() else 0
-    val columns = if (session.keyColumn?.isNotEmpty() == true) session.keyColumn.toString().toInt() else 0
+    private val rows = if (session.keyRow?.isNotEmpty() == true) session.keyRow.toString().toInt() else 0
+    private val columns = if (session.keyColumn?.isNotEmpty() == true) session.keyColumn.toString().toInt() else 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,47 +70,32 @@ class GridWordActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
     }
 
     private fun searchBtnClicked() = binding?.apply {
-        val gridSize = Pair(gridAdapter.numRows, gridAdapter.numColumns)
-        val minChars = calculateMinChars(gridSize)
-        Timber.e("minChars ===> $minChars")
-        if (etWord.getString().isNotEmpty() && etWord.getString().length >= minChars)
+        if (etWord.getString().isNotEmpty() && etWord.getString().length >= 2)
             highlightWord(etWord.getString().lowercase(Locale.getDefault()))
-        else dialogOk(getString(R.string.attention), "Min length should be $minChars", this@GridWordActivity)
+        else dialogOk(getString(R.string.attention), "Min length should be 2 or more", this@GridWordActivity)
     }
 
-    // Calculate the minimum characters required based on grid size
-    private fun calculateMinChars(gridSize: Pair<Int, Int>): Int = min(gridSize.first, gridSize.second)
-
-
     private fun createGrid() = binding?.apply {
-
         gridData = ArrayList()
         for (i in 0 until rows * columns) {
             gridData.add(' ')
         }
-
         gridAdapter = GridAdapter(rows, columns)
         gridView.adapter = gridAdapter
         gridView.numColumns = columns
-
         // Set alphabets in the grid
         session.keyAlphabets?.let { inputAlphabets ->
             for (i in 0 until minOf(gridData.size, inputAlphabets.length)) {
                 gridData[i] = inputAlphabets[i]
             }
-            gridAdapter.notifyDataSetChanged()
+            gridAdapter?.notifyDataSetChanged()
         }
-
     }
 
-
     private fun highlightWord(searchWord: String) {
-        Timber.e("searchWord ===> $searchWord")
-        val searchWordLowerCase = searchWord.toLowerCase()
-
+        val searchWordLowerCase = searchWord.toLowerCase(Locale.getDefault())
         // Create a copy of the original grid data
         val copyOfGridData = ArrayList(gridData)
-
         // Highlight all occurrences of the word
         for ((index, char) in copyOfGridData.withIndex()) {
             if (char.toLowerCase() == searchWordLowerCase[0]) {
@@ -123,8 +108,8 @@ class GridWordActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
                 for ((dx, dy) in directions) {
                     if (isWordInDirection(index, searchWordLowerCase, dx, dy)) {
                         // Highlight the word in the copy
-                        for (i in 0 until searchWord.length) {
-                            val newIndex = index + i * (dx + gridAdapter.numColumns * dy)
+                        for (i in searchWord.indices) {
+                            val newIndex = index + i * (dx + (gridAdapter?.numColumns ?:0) * dy)
                             copyOfGridData[newIndex] = copyOfGridData[newIndex].uppercaseChar()
                         }
                     }
@@ -133,12 +118,12 @@ class GridWordActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
         }
         // Update the grid data with the modified copy
         gridData = copyOfGridData
-        gridAdapter.notifyDataSetChanged()
+        gridAdapter?.notifyDataSetChanged()
     }
 
     private fun isWordInDirection(startIndex: Int, searchWord: String, dx: Int, dy: Int): Boolean {
-        val numRows = gridAdapter.numRows
-        val numColumns = gridAdapter.numColumns
+        val numRows = gridAdapter?.numRows ?:0
+        val numColumns = gridAdapter?.numColumns ?:0
         val wordLength = searchWord.length
 
         if (startIndex % numColumns + dx * (wordLength - 1) >= numColumns ||
@@ -153,7 +138,6 @@ class GridWordActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
     }
 
     private inner class GridAdapter(val numRows: Int, val numColumns: Int) : BaseAdapter() {
-        //private val selectedColor = ContextCompat.getColor(this@GridWordActivity, R.color.gold)
 
         override fun getCount(): Int = numRows * numColumns
 
@@ -173,4 +157,9 @@ class GridWordActivity : AppCompatActivity(), DialogOK.IDialogOKCallback {
         }
     }
 
+    override fun onDestroy() {
+        gridAdapter = null
+        _binding = null
+        super.onDestroy()
+    }
 }

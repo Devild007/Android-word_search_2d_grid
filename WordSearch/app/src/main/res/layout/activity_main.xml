@@ -11,12 +11,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/default_fifteen"
+        android:gravity="center"
         android:text="@string/enter_rows_and_columns_count"
-        android:textColor="@color/text_color"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size_14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,21 +106,31 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_create_grid"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_search"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/field_height"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/default_fifteen"
         android:layout_marginTop="@dimen/default_fifteen"
-        android:backgroundTint="@color/gold_dark"
-        android:foreground="?selectableItemBackground"
-        android:text="Create grid"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        app:cornerRadius="@dimen/padding_five"
+        app:cardCornerRadius="@dimen/padding_five"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ti_alphabet" />
+        app:layout_constraintTop_toBottomOf="@+id/ti_alphabet">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_create_grid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/field_height"
+            android:background="@drawable/bg_round_corners"
+            android:backgroundTint="@color/gold_dark"
+            android:foreground="?selectableItemBackground"
+            android:text="@string/create"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

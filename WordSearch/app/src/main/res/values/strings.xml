@@ -4,9 +4,11 @@
 
     <string name="enter_row_count">Enter row count<font fgcolor="#ffff0000">*</font></string>
     <string name="enter_no_row_count">Enter number of row\'s.</string>
+    <string name="entered_row_cannot_zero">Row\'s cannot be 0.</string>
 
     <string name="enter_column_count">Enter column count<font fgcolor="#ffff0000">*</font></string>
     <string name="enter_no_column_count">Enter number of column\'s.</string>
+    <string name="entered_column_cannot_zero">Column\'s cannot be 0.</string>
 
     <string name="enter_alphabet">Enter alphabet<font fgcolor="#ffff0000">*</font></string>
     <string name="enter_alphabet_in_one_go">Enter alphabet\'s in one go without space\'s.</string>
@@ -15,5 +17,6 @@
     <string name="search">Search</string>
     <string name="attention">Attention</string>
     <string name="okay">Okay</string>
+    <string name="create">Create</string>
 
 </resources>
